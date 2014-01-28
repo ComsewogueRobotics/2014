@@ -37,10 +37,10 @@ public class launcher extends Subsystem {
         return raised;
     }
     public void suck(){
-        roller.set(Relay.Value.kReverse);
+        roller.set(Relay.Value.kForward);
     }
     public void blow(){
-        roller.set(Relay.Value.kForward);
+        roller.set(Relay.Value.kReverse);
     }
     public void stop(){
         roller.set(Relay.Value.kOff);
