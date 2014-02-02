@@ -6,6 +6,7 @@ package edu.wpi.first.wpilibj.templates.commands;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.templates.Robot;
 import edu.wpi.first.wpilibj.templates.RobotMap;
 
 /**
@@ -17,15 +18,17 @@ public class LEDRingOn extends Command {
     public LEDRingOn() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        requires(Robot.CameraLights);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        RobotMap.cameraLights.set(Relay.Value.kOn);
+        Robot.CameraLights.setOn();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        //Robot.CameraLights.setOn();
     }
 
     // Make this return true when this Command no longer needs to run execute()

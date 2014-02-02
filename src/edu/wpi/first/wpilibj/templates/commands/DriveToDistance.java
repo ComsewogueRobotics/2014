@@ -32,7 +32,7 @@ public class DriveToDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.drivetrain.getPosition()-setpoint) < .02;
+        return Math.abs(Robot.drivetrain.getDistance()-setpoint) < .02;
     }
 
     // Called once after isFinished returns true

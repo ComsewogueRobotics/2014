@@ -35,7 +35,7 @@ public class RobotMap {
     public static Relay cameraLights;
     public static Compressor compressorObj;
     public static Relay roller;
-    public static AnalogChannel ultrasonic;
+    public static AnalogChannel ultrasonic;   
     public static void init() {
 
         drivetrainLeft1 = new Jaguar(1, 1);
@@ -52,8 +52,8 @@ public class RobotMap {
         
         drivetrainRobotDrive41 = new RobotDrive(drivetrainLeft1, drivetrainLeft2,
               drivetrainRight1, drivetrainRight2);
-        ultrasonic = new AnalogChannel(2);
-	SmartDashboard.putNumber("Ultrasonic Raw output", ultrasonic.getVoltage());
+        ultrasonic = new AnalogChannel(1);
+	//SmartDashboard.putNumber("Ultrasonic Raw output", ultrasonic.getVoltage());
         drivetrainRobotDrive41.setSafetyEnabled(true);
         drivetrainRobotDrive41.setExpiration(0.1);
         drivetrainRobotDrive41.setSensitivity(0.5);

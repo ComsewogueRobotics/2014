@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.templates.commands.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 
 /**
@@ -88,12 +89,16 @@ public class OI {
         
         driveButton1.whenPressed(new LowerLauncher());
         driveButton2.whileHeld(new Collect());
+        driveButton2.whenReleased(new StopRoller());
         shootButton1.whenPressed(new LowerLauncher());
         shootButton2.whenPressed(new Fire());
         shootButton4.whileHeld(new Collect());
+        shootButton4.whenReleased(new StopRoller());
         shootButton5.whileHeld(new Release());
+        shootButton5.whenReleased(new StopRoller());
         Robot.compressor.turnOn();
-
+       // SmartDashboard.putData("drivetrain", Robot.drivetrain);
+        LiveWindow.addActuator("drivetrain", "Drivetrain", Robot.drivetrain.getPIDController());
     }
     
 

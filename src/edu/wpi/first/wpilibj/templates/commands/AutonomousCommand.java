@@ -12,10 +12,9 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.templates.Robot;
-import edu.wpi.first.wpilibj.templates.RobotMap;
 
 
 /**
@@ -29,9 +28,10 @@ public class  AutonomousCommand extends CommandGroup {
         
 	requires(Robot.drivetrain);
         requires(Robot.launcher);
-        RobotMap.cameraLights.set(Relay.Value.kOff);
+        addSequential(new LEDRingOn());
         Robot.drivetrain.setSafetyEnabled(false);
-        //addSequential(new DriveToDistance(##));
+       // addSequential(new DriveToDistance(66));
+        addSequential(new WaitCommand(4));
         addSequential(new WaitForHot());
         addSequential(new Fire());
         
@@ -61,7 +61,7 @@ public class  AutonomousCommand extends CommandGroup {
 
     // Called once after isFinished returns true
     protected void end() {
-        RobotMap.cameraLights.set(Relay.Value.kOff);
+        new LEDRingOff();
     }
 
     // Called when another command which requires one or more of the same

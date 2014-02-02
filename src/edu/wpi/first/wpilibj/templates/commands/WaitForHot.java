@@ -72,19 +72,21 @@ public class WaitForHot extends Command {
         }
         for(int i=0; i<3; i++){
             if(shapes[i].getConf()>80){
-                System.out.println("DEBUG: name="+shapes[i].getName());
+           //     System.out.println("DEBUG: name="+shapes[i].getName());
                 if(shapes[i].getName().equals("Hot"))
                     numHot++;
                 else
                     numCold++;
             }
         }
-        for(int i=0;i<3;i++)
-            System.out.println("Shape "+i+": Status="+shapes[i].getName()+";\tConf="+shapes[i].getConf());
+        //for(int i=0;i<3;i++)
+       //     System.out.println("Shape "+i+": Status="+shapes[i].getName()+";\tConf="+shapes[i].getConf());
         SmartDashboard.putNumber("Number Hot", numHot);
         SmartDashboard.putNumber("Number Cold", numCold);
-        if(numHot>=1&&numCold>=1)
+        if(numHot>=1&&numCold>=1){
+            System.out.println("Target confirmed hot, WHISKEY OSCAR TANGO FOXTROT FIRE FIRE FIRE");
             return true;
+        }
         else
             return false;
     }

@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.templates.commands.*;
  */
 public class drivetrain extends PIDSubsystem {
 
-    private static final double Kp = 0.0;
+    private static final double Kp = 25;
     private static final double Ki = 0.0;
     private static final double Kd = 0.0;
     SpeedController left1 = RobotMap.drivetrainLeft1;
@@ -46,10 +46,10 @@ public class drivetrain extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        return ultrasonic.getVoltage();
+        return getDistance();
     }
-    public double getUltraVolt(){
-        return ultrasonic.getVoltage();
+    public double getDistance(){
+        return (ultrasonic.getAverageVoltage()*102.4)/2.54; //inches 
     }
     
     protected void usePIDOutput(double output) {
@@ -68,5 +68,8 @@ public class drivetrain extends PIDSubsystem {
     }
     public void setSafetyEnabled(boolean x){
         robotDrive41.setSafetyEnabled(x);
+    }
+    public AnalogChannel getUltrasonic(){
+        return ultrasonic;
     }
 }

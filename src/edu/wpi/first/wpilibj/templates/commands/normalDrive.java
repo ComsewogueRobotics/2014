@@ -36,7 +36,7 @@ public class  normalDrive extends Command {
     protected void execute() {
         double throttle = ((-Robot.oi.getdriveStick().getThrottle())+1)/2.0;
         SmartDashboard.putNumber("Throttle", throttle);
-        SmartDashboard.putNumber("Ultrasonic voltage", Robot.drivetrain.getUltraVolt());
+        SmartDashboard.putNumber("Ultrasonic distance(?)", Robot.drivetrain.getDistance());
         Robot.drivetrain.arcadeDrive(-Robot.oi.getDriveY()/*throttle*/, -Robot.oi.getDriveRotate()/*throttle*/);
     }
 

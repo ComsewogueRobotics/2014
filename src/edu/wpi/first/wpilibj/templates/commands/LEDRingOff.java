@@ -4,9 +4,8 @@
  */
 package edu.wpi.first.wpilibj.templates.commands;
 
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.templates.RobotMap;
+import edu.wpi.first.wpilibj.templates.Robot;
 
 /**
  *
@@ -17,11 +16,12 @@ public class LEDRingOff extends Command {
     public LEDRingOff() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        requires(Robot.CameraLights);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        RobotMap.cameraLights.set(Relay.Value.kOff);
+        Robot.CameraLights.setOff();
     }
 
     // Called repeatedly when this Command is scheduled to run

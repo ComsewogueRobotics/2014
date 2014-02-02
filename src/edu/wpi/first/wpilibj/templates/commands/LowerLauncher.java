@@ -30,7 +30,7 @@ public class LowerLauncher extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.oi.getshootStick().getTrigger();
+        return !Robot.oi.getshootStick().getTrigger()&&!Robot.oi.getshootStick().getTrigger();
     }
 
     // Called once after isFinished returns true
