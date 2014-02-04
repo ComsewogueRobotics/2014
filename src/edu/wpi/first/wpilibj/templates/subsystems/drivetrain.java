@@ -26,6 +26,8 @@ public class drivetrain extends PIDSubsystem {
     SpeedController right2 = RobotMap.drivetrainRight2;
     RobotDrive robotDrive41 = RobotMap.drivetrainRobotDrive41;
     AnalogChannel ultrasonic = RobotMap.ultrasonic;
+    private double MAX_DISTANCE = 68;
+    private double MIN_DISTANCE = 63;
     // Initialize your subsystem here
     public drivetrain() {
         super("drivetrain", Kp, Ki, Kd);
@@ -71,5 +73,9 @@ public class drivetrain extends PIDSubsystem {
     }
     public AnalogChannel getUltrasonic(){
         return ultrasonic;
+    }
+    public boolean shouldFire(){
+        if(getDistance()<MAX_DISTANCE&&getDistance()>MIN_DISTANCE) return true;
+        return false;
     }
 }
