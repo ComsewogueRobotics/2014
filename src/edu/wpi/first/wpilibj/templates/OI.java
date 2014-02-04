@@ -82,6 +82,7 @@ public class OI {
         
         Button driveButton1 = new JoystickButton(driveStick, 1);
         Button driveButton2 = new JoystickButton(driveStick, 2);
+        Button driveButton3 = new JoystickButton(driveStick, 3);
         Button shootButton1 = new JoystickButton(shootStick, 1);
         Button shootButton2 = new JoystickButton(shootStick, 2);
         Button shootButton4 = new JoystickButton(shootStick, 4);
@@ -90,6 +91,7 @@ public class OI {
         driveButton1.whenPressed(new LowerLauncher());
         driveButton2.whileHeld(new Collect());
         driveButton2.whenReleased(new StopRoller());
+        driveButton3.whileHeld(new SlowDrive());
         shootButton1.whenPressed(new LowerLauncher());
         shootButton2.whenPressed(new Fire());
         shootButton4.whileHeld(new Collect());
@@ -98,7 +100,7 @@ public class OI {
         shootButton5.whenReleased(new StopRoller());
         Robot.compressor.turnOn();
        // SmartDashboard.putData("drivetrain", Robot.drivetrain);
-        LiveWindow.addActuator("drivetrain", "Drivetrain", Robot.drivetrain.getPIDController());
+        //LiveWindow.addActuator("drivetrain", "Drivetrain", Robot.drivetrain.getPIDController());
     }
     
 
