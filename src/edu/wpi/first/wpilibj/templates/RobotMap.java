@@ -36,6 +36,7 @@ public class RobotMap {
     public static Compressor compressorObj;
     public static Relay roller;
     public static AnalogChannel ultrasonic;   
+    public static Relay blockerMotor;
     public static void init() {
 
         drivetrainLeft1 = new Jaguar(1, 1);
@@ -70,6 +71,7 @@ public class RobotMap {
         
         cameraLights = new Relay(3);
         
-        
+        blockerMotor = new Relay(4);
+
     }
 }

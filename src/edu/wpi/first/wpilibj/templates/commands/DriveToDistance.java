@@ -5,6 +5,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.templates.Robot;
 
 /**
@@ -44,11 +45,12 @@ public class DriveToDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        SmartDashboard.putNumber("Ultrasonic distance", Robot.drivetrain.getDistance());
         if(Robot.drivetrain.getDistance() < next){
             next = next*DIST_SCALE;
             speed = speed*SPEED_SCALE;
         }
-        
+        Robot.drivetrain.drive(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -59,6 +61,7 @@ public class DriveToDistance extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("DriveToDistance finished");
         Robot.drivetrain.stop();
     }
 

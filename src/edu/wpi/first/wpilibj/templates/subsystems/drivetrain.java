@@ -63,7 +63,7 @@ public class drivetrain extends PIDSubsystem {
         robotDrive41.arcadeDrive(y, x);
     }
     public void drive(double speed){
-        robotDrive41.setLeftRightMotorOutputs(speed, speed);
+        robotDrive41.setLeftRightMotorOutputs(speed+(.1*speed), speed);
     }
     public void stop(){
         robotDrive41.stopMotor();

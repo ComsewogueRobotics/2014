@@ -8,7 +8,8 @@ public class Shape{
     private String name;
     private double confidence;
     private int hotLoc;
-    public Shape(double[] raw, String ShapesPath){
+    public Shape(double[] raw, String ShapesPath) throws StringIndexOutOfBoundsException, ArrayIndexOutOfBoundsException{
+        try{
         hotLoc = ShapesPath.indexOf("Hot");
         System.out.println("Full ShapesPath: "+ShapesPath);
         System.out.println("index of 'Hot' = "+hotLoc);
@@ -19,6 +20,11 @@ public class Shape{
         } else 
             name = "Cold";
         confidence = raw[0]/1000.0;
+    }catch(Exception e){
+        name = "Cold";
+        confidence = raw[0]/1000.0;
+    } 
+    
     }
     public String getName(){
         return name;

@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.templates.Shape;
  */
 
 public class WaitForHot extends Command {
+    private int timer = 0;
     private NetworkTable table;
     public WaitForHot() {
         // Use requires() here to declare subsystem dependencies
@@ -46,16 +47,17 @@ public class WaitForHot extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
-    protected boolean getIsHot(){
+    protected boolean getIsHot() throws ArrayIndexOutOfBoundsException{
         int numHot = 0;
         int numCold = 0;
         table = NetworkTable.getTable("CameraData");
         NumberArray rawData = new NumberArray();
         table.retrieveValue("SHAPES", rawData);
         String shapesPath = table.getString("SHAPES_PATH");
-        
+        try{
         double[] tmp = new double[9];
         Shape[] shapes = new Shape[3];
+        if(rawData.size()>18){
         for(int i=0; i<27; i++){
             if(i<9)
                 tmp[i] = rawData.get(i);
@@ -79,8 +81,37 @@ public class WaitForHot extends Command {
                     numCold++;
             }
         }
+        } else if(rawData.size()>8){
+        for(int i=0; i<18; i++){
+            if(i<9)
+                tmp[i] = rawData.get(i);
+            if(i==8)
+                 shapes[0] = new Shape(tmp, shapesPath);
+            if(i>8&&i<18)
+                tmp[i-9] = rawData.get(i); 
+            if(i==17)
+                shapes[1] = new Shape(tmp, shapesPath);
+        }
+        for(int i=0; i<2; i++){
+            if(shapes[i].getConf()>80){
+                System.out.println("DEBUG: name="+shapes[i].getName());
+                if(shapes[i].getName().equals("Hot"))
+                    numHot++;
+                else
+                    numCold++;
+            }
+        }
+            
+        } else return false;
+        } catch(Exception e){
+            e.printStackTrace();
+            timer++;
+            if(timer==150)
+                return true;
+            return false;
+        }
         //for(int i=0;i<3;i++)
-       //     System.out.println("Shape "+i+": Status="+shapes[i].getName()+";\tConf="+shapes[i].getConf());
+          //  System.out.println("Shape "+i+": Status="+shapes[i].getName()+";\tConf="+shapes[i].getConf());
         SmartDashboard.putNumber("Number Hot", numHot);
         SmartDashboard.putNumber("Number Cold", numCold);
         if(numHot>=1&&numCold>=1){
