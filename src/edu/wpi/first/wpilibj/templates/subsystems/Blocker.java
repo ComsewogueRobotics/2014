@@ -25,7 +25,7 @@ public class Blocker extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     public void goUp(){
-        motor.set(Relay.Value.kOn);
+        motor.set(Relay.Value.kForward);
     }
     public void goDown(){
         motor.set(Relay.Value.kReverse);
@@ -34,9 +34,9 @@ public class Blocker extends Subsystem {
         motor.set(Relay.Value.kOff);
     }
     public boolean isUp(){
-        return top.get();
+        return !top.get();
     }
     public boolean isDown(){
-        return bottom.get();
+        return !bottom.get();
     }
 }

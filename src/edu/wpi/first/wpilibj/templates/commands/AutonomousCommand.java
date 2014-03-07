@@ -13,9 +13,8 @@ package edu.wpi.first.wpilibj.templates.commands;
 
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.templates.Robot;
-import edu.wpi.first.wpilibj.templates.RobotMap;
+//import edu.wpi.first.wpilibj.templates.RobotMap;
 
 
 /**

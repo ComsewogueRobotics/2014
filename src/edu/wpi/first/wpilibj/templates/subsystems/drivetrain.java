@@ -5,6 +5,7 @@
 package edu.wpi.first.wpilibj.templates.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.templates.commands.*;
  */
 public class drivetrain extends PIDSubsystem {
 
-    private static final double Kp = 25;
+    private static final double Kp = 0.0;
     private static final double Ki = 0.0;
     private static final double Kd = 0.0;
     SpeedController left1 = RobotMap.drivetrainLeft1;
@@ -26,8 +27,12 @@ public class drivetrain extends PIDSubsystem {
     SpeedController right2 = RobotMap.drivetrainRight2;
     RobotDrive robotDrive41 = RobotMap.drivetrainRobotDrive41;
     AnalogChannel ultrasonic = RobotMap.ultrasonic;
-    private double MAX_DISTANCE = 68;
-    private double MIN_DISTANCE = 63;
+    AnalogChannel backUltrasonic = RobotMap.backUltrasonic;
+    public Gyro gyro = RobotMap.gyro;
+    private final double MAX_DISTANCE = 69;
+    private final double MIN_DISTANCE = 35;
+    private final double MIN_TRUSS_DIST = 123;        //These aren't the distances from the truss, they are the distances
+    private final double MAX_TRUSS_DIST = 456;        //from the back of the robot to the wall behind it.
     // Initialize your subsystem here
     public drivetrain() {
         super("drivetrain", Kp, Ki, Kd);
@@ -51,7 +56,16 @@ public class drivetrain extends PIDSubsystem {
         return getDistance();
     }
     public double getDistance(){
-        return (ultrasonic.getAverageVoltage()*102.4)/2.54; //inches 
+        //return (ultrasonic.getAverageVoltage()*102.4)/2.54; //incorrect inches 
+        return ultrasonic.getAverageVoltage()*39.6858904; //correct inches?
+    }
+    public double getDistFromBack(){
+        return backUltrasonic.getAverageVoltage(); //gotta get dat constant and put it in here
+    }
+    public boolean shouldTruss(){
+        if(getDistFromBack() > MIN_TRUSS_DIST && getDistFromBack() < MAX_TRUSS_DIST)
+            return true;
+        return false;
     }
     
     protected void usePIDOutput(double output) {
@@ -62,8 +76,8 @@ public class drivetrain extends PIDSubsystem {
     public void arcadeDrive(double y,double x){
         robotDrive41.arcadeDrive(y, x);
     }
-    public void drive(double speed){
-        robotDrive41.setLeftRightMotorOutputs(speed+(.1*speed), speed);
+    public void drive(double lSpeed, double rSpeed){
+        robotDrive41.setLeftRightMotorOutputs(lSpeed, rSpeed);
     }
     public void stop(){
         robotDrive41.stopMotor();

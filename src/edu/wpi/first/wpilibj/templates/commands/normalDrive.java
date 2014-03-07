@@ -36,9 +36,8 @@ public class  normalDrive extends Command {
     protected void execute() {
         double throttle = ((-Robot.oi.getdriveStick().getThrottle())+1)/2.0;
         SmartDashboard.putNumber("Throttle", throttle);
-        SmartDashboard.putNumber("Ultrasonic distance", Robot.drivetrain.getDistance());
-        Robot.drivetrain.arcadeDrive(-Robot.oi.getDriveY()/*throttle*/, -Robot.oi.getDriveRotate()/*throttle*/);        
-        SmartDashboard.putBoolean("Should Fire", Robot.drivetrain.shouldFire());
+        Robot.drivetrain.arcadeDrive(-Robot.oi.getDriveY()*throttle, -Robot.oi.getDriveRotate()*throttle);        
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()

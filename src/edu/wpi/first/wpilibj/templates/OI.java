@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.templates.commands.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 
 /**
@@ -76,28 +75,37 @@ public class OI {
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("LEDs On", new LEDRingOn());
         SmartDashboard.putData("LEDs Off", new LEDRingOff());
-
-        
+        SmartDashboard.putData("BlockerUp", new BlockerUp());
+        SmartDashboard.putData("Blockerdown", new BlockerDown());
         
         
         Button driveButton1 = new JoystickButton(driveStick, 1);
         Button driveButton2 = new JoystickButton(driveStick, 2);
         Button driveButton3 = new JoystickButton(driveStick, 3);
+        Button driveButton4 = new JoystickButton(driveStick, 4);
+        Button driveButton5 = new JoystickButton(driveStick, 5);
+        Button driveButton6 = new JoystickButton(driveStick, 6);
         Button shootButton1 = new JoystickButton(shootStick, 1);
         Button shootButton2 = new JoystickButton(shootStick, 2);
         Button shootButton4 = new JoystickButton(shootStick, 4);
         Button shootButton5 = new JoystickButton(shootStick, 5);
+        Button shootButton3 = new JoystickButton(shootStick, 3);
         
         driveButton1.whenPressed(new LowerLauncher());
         driveButton2.whileHeld(new Collect());
         driveButton2.whenReleased(new StopRoller());
         driveButton3.whileHeld(new SlowDrive());
+        driveButton4.whenPressed(new BlockerDown());
+        driveButton5.whenPressed(new Celebrate());
+        driveButton6.whenPressed(new BlockerUp());
         shootButton1.whenPressed(new LowerLauncher());
         shootButton2.whenPressed(new Fire());
+        shootButton3.whenPressed(new Celebrate());
         shootButton4.whileHeld(new Collect());
         shootButton4.whenReleased(new StopRoller());
         shootButton5.whileHeld(new Release());
         shootButton5.whenReleased(new StopRoller());
+        Robot.Lights.decOn();
         Robot.compressor.turnOn();
        // SmartDashboard.putData("drivetrain", Robot.drivetrain);
         //LiveWindow.addActuator("drivetrain", "Drivetrain", Robot.drivetrain.getPIDController());

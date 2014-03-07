@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.templates.Robot;
  */
 public class SlowDrive extends Command {
     
-    private final double SLOW_FACTOR = .4;
+    private final double SLOW_FACTOR = .75;
     
     public SlowDrive() {
         // Use requires() here to declare subsystem dependencies

@@ -4,6 +4,7 @@
  */
 package edu.wpi.first.wpilibj.templates.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.networktables2.type.NumberArray;
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj.templates.Shape;
 
 public class WaitForHot extends Command {
     private int timer = 0;
+    Timer Timer = new Timer();
     private NetworkTable table;
     public WaitForHot() {
         // Use requires() here to declare subsystem dependencies
@@ -28,6 +30,7 @@ public class WaitForHot extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         
+        Timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -48,6 +51,9 @@ public class WaitForHot extends Command {
     protected void interrupted() {
     }
     protected boolean getIsHot() throws ArrayIndexOutOfBoundsException{
+        if(Timer.get()>6000000) {
+            return true;
+        }
         int numHot = 0;
         int numCold = 0;
         table = NetworkTable.getTable("CameraData");
@@ -104,7 +110,7 @@ public class WaitForHot extends Command {
             
         } else return false;
         } catch(Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             timer++;
             if(timer==150)
                 return true;

@@ -28,6 +28,7 @@ public class RobotMap {
     public static SpeedController drivetrainLeft2;
     public static SpeedController drivetrainRight1;
     public static SpeedController drivetrainRight2;
+    public static Gyro gyro;
     public static RobotDrive drivetrainRobotDrive41;
     public static Solenoid launcherElevator;
     public static Solenoid shoot1;
@@ -36,9 +37,13 @@ public class RobotMap {
     public static Compressor compressorObj;
     public static Relay roller;
     public static AnalogChannel ultrasonic;   
+    public static AnalogChannel backUltrasonic;
     public static Relay blockerMotor;
+    public static Relay decLights;
+    public static DriverStationEnhancedIO dseio;
     public static void init() {
 
+        dseio = DriverStation.getInstance().getEnhancedIO();
         drivetrainLeft1 = new Jaguar(1, 1);
 	LiveWindow.addActuator("drivetrain", "Left1", (Jaguar) drivetrainLeft1);
         
@@ -50,6 +55,9 @@ public class RobotMap {
         
         drivetrainRight2 = new Jaguar(1, 4);
 	LiveWindow.addActuator("drivetrain", "Right2", (Jaguar) drivetrainRight2);
+        
+        backUltrasonic = new AnalogChannel(3);
+        gyro = new Gyro(2);
         
         drivetrainRobotDrive41 = new RobotDrive(drivetrainLeft1, drivetrainLeft2,
               drivetrainRight1, drivetrainRight2);
@@ -72,6 +80,6 @@ public class RobotMap {
         cameraLights = new Relay(3);
         
         blockerMotor = new Relay(4);
-
+        decLights = new Relay(5);
     }
 }

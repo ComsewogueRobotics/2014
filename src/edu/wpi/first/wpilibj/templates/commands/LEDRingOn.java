@@ -18,12 +18,12 @@ public class LEDRingOn extends Command {
     public LEDRingOn() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.CameraLights);
+        requires(Robot.Lights);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.CameraLights.setOn();
+        Robot.Lights.setOn();
     }
 
     // Called repeatedly when this Command is scheduled to run
