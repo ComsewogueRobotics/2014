@@ -14,7 +14,7 @@ package edu.wpi.first.wpilibj.templates;
 import edu.wpi.first.wpilibj.*;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -36,14 +36,14 @@ public class RobotMap {
     public static Relay cameraLights;
     public static Compressor compressorObj;
     public static Relay roller;
-    public static AnalogChannel ultrasonic;   
-    public static AnalogChannel backUltrasonic;
+    //public static AnalogChannel ultrasonic;   //old, broken
+    public static AnalogChannel ultrasonic;
     public static Relay blockerMotor;
     public static Relay decLights;
-    public static DriverStationEnhancedIO dseio;
+
     public static void init() {
 
-        dseio = DriverStation.getInstance().getEnhancedIO();
+
         drivetrainLeft1 = new Jaguar(1, 1);
 	LiveWindow.addActuator("drivetrain", "Left1", (Jaguar) drivetrainLeft1);
         
@@ -56,12 +56,12 @@ public class RobotMap {
         drivetrainRight2 = new Jaguar(1, 4);
 	LiveWindow.addActuator("drivetrain", "Right2", (Jaguar) drivetrainRight2);
         
-        backUltrasonic = new AnalogChannel(3);
+        ultrasonic = new AnalogChannel(3);
         gyro = new Gyro(2);
         
         drivetrainRobotDrive41 = new RobotDrive(drivetrainLeft1, drivetrainLeft2,
               drivetrainRight1, drivetrainRight2);
-        ultrasonic = new AnalogChannel(1);
+        //ultrasonic = new AnalogChannel(1); //old, broken
 	//SmartDashboard.putNumber("Ultrasonic Raw output", ultrasonic.getVoltage());
         drivetrainRobotDrive41.setSafetyEnabled(true);
         drivetrainRobotDrive41.setExpiration(0.1);

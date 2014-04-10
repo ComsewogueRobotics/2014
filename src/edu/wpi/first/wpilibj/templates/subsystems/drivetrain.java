@@ -26,13 +26,13 @@ public class drivetrain extends PIDSubsystem {
     SpeedController right1 = RobotMap.drivetrainRight1;
     SpeedController right2 = RobotMap.drivetrainRight2;
     RobotDrive robotDrive41 = RobotMap.drivetrainRobotDrive41;
+    //AnalogChannel ultrasonic = RobotMap.ultrasonic;   //old, broken
     AnalogChannel ultrasonic = RobotMap.ultrasonic;
-    AnalogChannel backUltrasonic = RobotMap.backUltrasonic;
     public Gyro gyro = RobotMap.gyro;
-    private final double MAX_DISTANCE = 69;
+    private final double MAX_DISTANCE = 40;
     private final double MIN_DISTANCE = 35;
-    private final double MIN_TRUSS_DIST = 123;        //These aren't the distances from the truss, they are the distances
-    private final double MAX_TRUSS_DIST = 456;        //from the back of the robot to the wall behind it.
+    //private final double MIN_TRUSS_DIST = 248;        //These aren't the distances from the truss, they are the distances
+    //private final double MAX_TRUSS_DIST = 262;        //from the back of the robot to the wall behind it.
     // Initialize your subsystem here
     public drivetrain() {
         super("drivetrain", Kp, Ki, Kd);
@@ -55,18 +55,18 @@ public class drivetrain extends PIDSubsystem {
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
         return getDistance();
     }
-    public double getDistance(){
+    /*public double getDistance(){
         //return (ultrasonic.getAverageVoltage()*102.4)/2.54; //incorrect inches 
         return ultrasonic.getAverageVoltage()*39.6858904; //correct inches?
+    }*/
+    public double getDistance(){     //This is the ultra that used to be on the back, but due 
+        return ultrasonic.getAverageVoltage()*81.026032; //to the front one being destroyed, this one is taking over as primary. (moved to front)
     }
-    public double getDistFromBack(){
-        return backUltrasonic.getAverageVoltage(); //gotta get dat constant and put it in here
-    }
-    public boolean shouldTruss(){
+    /*public boolean shouldTruss(){
         if(getDistFromBack() > MIN_TRUSS_DIST && getDistFromBack() < MAX_TRUSS_DIST)
             return true;
         return false;
-    }
+    }*/
     
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor

@@ -51,16 +51,19 @@ public class WaitForHot extends Command {
     protected void interrupted() {
     }
     protected boolean getIsHot() throws ArrayIndexOutOfBoundsException{
-        if(Timer.get()>6000000) {
+        System.out.println("Timer: "+Timer.get());
+        if(Timer.get()>3) {
+            
+            System.out.println("Hot goal detection timed out.");
             return true;
         }
         int numHot = 0;
         int numCold = 0;
+        try{
         table = NetworkTable.getTable("CameraData");
         NumberArray rawData = new NumberArray();
         table.retrieveValue("SHAPES", rawData);
         String shapesPath = table.getString("SHAPES_PATH");
-        try{
         double[] tmp = new double[9];
         Shape[] shapes = new Shape[3];
         if(rawData.size()>18){
@@ -120,7 +123,7 @@ public class WaitForHot extends Command {
           //  System.out.println("Shape "+i+": Status="+shapes[i].getName()+";\tConf="+shapes[i].getConf());
         SmartDashboard.putNumber("Number Hot", numHot);
         SmartDashboard.putNumber("Number Cold", numCold);
-        if(numHot>=1&&numCold>=1){
+        if(numHot>=1/*&&numCold>=1*/){
             System.out.println("Target confirmed hot, WHISKEY OSCAR TANGO FOXTROT FIRE FIRE FIRE");
             return true;
         }

@@ -59,7 +59,7 @@ public class Robot extends IterativeRobot {
 
         // instantiate the command used for the autonomous period
 
-        autonomousCommand = new AutonomousCommand();
+        autonomousCommand = new SafeAuto();
         SmartDashboard.putData("Scheduler Status", Scheduler.getInstance());
         
     }

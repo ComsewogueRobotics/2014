@@ -30,8 +30,8 @@ public class  AutonomousCommand extends CommandGroup {
         requires(Robot.launcher);
         addSequential(new LEDRingOn());
         //Robot.drivetrain.setSafetyEnabled(false);
-        addSequential(new DriveToDistance(66));
-        addSequential(new WaitForHot());
+        addSequential(new DriveToDistance(35));
+        //addSequential(new WaitForHot());
         addSequential(new Fire());
         
         

@@ -85,6 +85,7 @@ public class OI {
         Button driveButton4 = new JoystickButton(driveStick, 4);
         Button driveButton5 = new JoystickButton(driveStick, 5);
         Button driveButton6 = new JoystickButton(driveStick, 6);
+        Button driveButton12 = new JoystickButton(driveStick, 12);
         Button shootButton1 = new JoystickButton(shootStick, 1);
         Button shootButton2 = new JoystickButton(shootStick, 2);
         Button shootButton4 = new JoystickButton(shootStick, 4);
@@ -98,6 +99,7 @@ public class OI {
         driveButton4.whenPressed(new BlockerDown());
         driveButton5.whenPressed(new Celebrate());
         driveButton6.whenPressed(new BlockerUp());
+        driveButton12.whenPressed(new StickShooterOut());
         shootButton1.whenPressed(new LowerLauncher());
         shootButton2.whenPressed(new Fire());
         shootButton3.whenPressed(new Celebrate());
